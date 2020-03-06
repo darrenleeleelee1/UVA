@@ -1,24 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, s, temp1, temp2, maxL, endp, counter;
+int n, s, temp1, temp2, maxL, endp, counter, dis[102];
 vector<int> v[102];
-void dfs1(int now, int fa, int layer)
+void bellman_ford(int x)
 {
-	if(maxL < layer) maxL = layer;
-	for (auto i : v[now])
-	{
-		if(i != fa) dfs1(i, now, layer + 1);
-	}
-}
-void dfs2(int now, int fa, int layer)
-{
-	if(layer == maxL){
-		if(now < endp) endp = now;
-	}
-	for (auto i : v[now])
-	{
-		if(i != fa) dfs2(i, now, layer + 1);
-	}
+	dis[x] = 0;
+	for (int k = 1; k < n; ++k){
+	 	for (int i = 1; i <= n; ++i){
+	 		for(int j : v[i]){
+	 			if(dis[i] != -1){
+	 				if(dis[j] < dis[i] + 1)
+	 					dis[j] = dis[i] + 1;
+	 			}
+	 		}
+	 	}
+	 } 
 }
 int main(int argc, char const *argv[])
 {
@@ -28,6 +24,7 @@ int main(int argc, char const *argv[])
 		for (int i = 1; i <= n; ++i)
 		{
 			v[i].clear();
+			dis[i] = -1;
 		}
 		while(cin >> temp1 >> temp2){
 			if(temp1 == 0 && temp2 == 0) break;
@@ -35,9 +32,16 @@ int main(int argc, char const *argv[])
 		}
 		maxL = -1;
 		endp = 1e9;
-		dfs1(s, -1, 0);
-		dfs2(s, -1, 0);
-		printf("Case %d: The longest path from %d has length %d, finishing at %d.\n", counter++, s, maxL, endp);
+		bellman_ford(s);
+		for (int i = 1; i <= n; ++i)
+		{
+			if(dis[i] > maxL){
+				maxL = dis[i];
+				endp = i;
+			}
+			//printf("%2d :%2d\n", i, dis[i]);
+		}
+		printf("Case %d: The longest path from %d has length %d, finishing at %d.\n\n", counter++, s, maxL, endp);
 	}
 	return 0;
 }
