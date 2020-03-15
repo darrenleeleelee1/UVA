@@ -7,7 +7,7 @@ void bellman_ford(int x)
 	dis[x] = 0;
 	for (int k = 1; k < n; ++k){
 	 	for (int i = 1; i <= n; ++i){
-	 		for(int j : v[i]){
+	 		for(auto j : v[i]){
 	 			if(dis[i] != -1){
 	 				if(dis[j] < dis[i] + 1)
 	 					dis[j] = dis[i] + 1;
