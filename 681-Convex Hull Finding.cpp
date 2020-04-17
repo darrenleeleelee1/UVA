@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
 			v.push_back(cor[0]);
 			v.push_back(cor[1]);
 			for(int i = 2; i < n; i++){
-				while(ZCrossProduct(v[v.size()-2], v[v.size()-1], cor[i]) <= 0){
+				while(ZCrossProduct(v[v.size()-2], v[v.size()-1], cor[i]) <= 0 && v.size() != 1){
 					v.pop_back();
 				}
 				v.push_back(cor[i]);
