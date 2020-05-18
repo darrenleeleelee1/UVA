@@ -25,7 +25,6 @@ int find(int src){
 bool connect(int x, int y){
 	int xParent = find(x);
 	int yParent = find(y);
-	//printf("%d %d\n", xParent, yParent);
 	if(xParent != yParent){
 		parent[xParent] = yParent;
 		return true;
