@@ -11,8 +11,11 @@ Coor backtracking[maxn][maxn];
 vector<Coor>ans;
 int main(int argc, char const *argv[])
 {
-	while(~scanf("%s", &s1)){
-		scanf("%s", &s2);
+	bool begining = true;
+	while(gets(s1)){
+		gets(s2);
+		if(begining) begining = false;
+		else printf("\n");
 		memset(dp, 0, sizeof(dp));
 		memset(backtracking, 0, sizeof(backtracking));
 		ans.clear();
@@ -73,10 +76,6 @@ int main(int argc, char const *argv[])
 				}
 			}
 		}
-		printf("\n");
-
-
-
 	}
 	return 0;
 }
