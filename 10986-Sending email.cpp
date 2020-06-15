@@ -41,13 +41,19 @@ int main(int argc, char const *argv[])
 			v[i].clear();
 			dis[i] = 1e9;
 		}
-
+		memset(w, 0, sizeof(w));
 		while(m--)
 		{
 			cin >> temp1 >> temp2 >> tempw;
 			v[temp1].push_back(temp2);
 			v[temp2].push_back(temp1);
-			w[temp1][temp2] = w[temp2][temp1] = tempw;
+			if(w[temp1][temp2] == 0) w[temp1][temp2] = w[temp2][temp1] = tempw; 
+			else{
+				w[temp1][temp2] = min(w[temp1][temp2], tempw);
+				w[temp2][temp1] = min(w[temp2][temp1], tempw);	
+			}
+
+			
 		}
 		dijsktra(S);
 		if(dis[T] != 1e9)	printf("Case #%d: %d\n", cnt++, dis[T]);
