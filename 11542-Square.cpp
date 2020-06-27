@@ -15,17 +15,11 @@ void sieve(int src)
 			}
 		}
 	}
-}
-int generatePrimes(int src)
-{
-	sieve(src);
-	int c =0;
+	int cnt = 0;
 	for(int i = 2; i <= src; i++){
-		if(!visit[i]){
-			primes[c++] = i;
-		}
+		if(!visit[i]) primes[cnt++] = i;
 	}
-	return c;
+	return cnt;
 }
 int ranks(Matrix A, int m, int n)
 {
@@ -60,7 +54,7 @@ int main(int argc, char const *argv[])
 {
 	int T; cin >> T;
 	int n, maxp;
-	int m = generatePrimes(500);
+	int m = sieve(500);
 	long long int x;
 	while(T--){
 		cin >> n;
